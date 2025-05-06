@@ -3,12 +3,20 @@ pedido = []
 listaPedidos = []
 
 #listas de setup
-codigos = [100,101]
-esp = ["Hot - Dog","refri"]
-preco = [10,5]
+codigos = [100,101,102,103,104,105]
+esp = ["Cachorro Quente","Bauru Simples","Bauru c/Ovo","Hamburguer","Cheesburguer","Refrigerante"]
+preco = [3.50,3.80,4.50,4.70,5.30,4]
 
 #lista para armazenar o valor
 listaPreco = []
+
+# Função para validar o nome
+def validar_nome(nome):
+    if not nome.strip():
+        return False
+    if any(char.isdigit() for char in nome):
+        return False
+    return True
 
 #Inicio programa
 comecarPrograma = input("iniciar novo pedido? (S/N)\n")
@@ -19,14 +27,21 @@ if(comecarPrograma == "s" or comecarPrograma == "S"):
     #Inicio pedido
     while(comecarPrograma == 1):
         nome = input("Digite seu nome:\n")
-        
+        while not validar_nome(nome):
+            print("Nome inválido. Digite novamente (não pode estar vazio ou conter números).")
+            nome = input("Digite seu nome:\n")
+
         listaPedidos.append(nome)
         comecarCompra = 1
 
         while(comecarCompra == 1):
-            print("Cardapio | Código  | Preço\n" \
-              "100      | Hot-dog | R$10,00\n" \
-              "101      | Refri   | R$5,00")
+            print("Cardápio:")
+            print("100 - Cachorro Quente - R$ 3,50")
+            print("101 - Bauru simples   - R$ 3,80")
+            print("102 - Bauru c/ ovo    - R$ 4,50")
+            print("103 - Hamburguer      - R$ 4,70")
+            print("104 - Cheesburguer    - R$ 5,30")
+            print("105 - Refrigerante    - R$ 4,00")
             
             cod = int(input("Digite o codigo desejado:\n"))
             
@@ -40,11 +55,30 @@ if(comecarPrograma == "s" or comecarPrograma == "S"):
                         pedido.append(esp[0])
                         pedido.append(preco[0])
                         continuaCompra = 0
-                        
                     elif(cod == 101):
                         pedido.append(cod)
                         pedido.append(esp[1])
                         pedido.append(preco[1])
+                        continuaCompra = 0
+                    elif(cod == 102):
+                        pedido.append(cod)
+                        pedido.append(esp[2])
+                        pedido.append(preco[2])
+                        continuaCompra = 0
+                    elif(cod == 103):
+                        pedido.append(cod)
+                        pedido.append(esp[3])
+                        pedido.append(preco[3])
+                        continuaCompra = 0
+                    elif(cod == 104):
+                        pedido.append(cod)
+                        pedido.append(esp[4])
+                        pedido.append(preco[4])
+                        continuaCompra = 0
+                    else:
+                        pedido.append(cod)
+                        pedido.append(esp[5])
+                        pedido.append(preco[5])
                         continuaCompra = 0
 
                 #Pergunta ao usuario a quantidade do item
@@ -78,9 +112,10 @@ if(comecarPrograma == "s" or comecarPrograma == "S"):
 
         #Imprimir ao usuario seu pedido
         print(f"Nome: {listaPedidos[0]}")
-        print(f"pedido: {listaPedidos}")
-        print(f"total a pagar: {total}")
+        print("pedido:")
+        for item in listaPedidos[1:]:
+            print(f"  - Código: {item[0]}, Produto: {item[1]}, Preço: R${item[2]}, Quantidade: {item[3]}, Subtotal: R${item[4]}")
+        print(f"Total a pagar: R${total}")
 
 else: 
     print("Pedido encerrado")
-
