@@ -36,12 +36,9 @@ if(comecarPrograma == "s" or comecarPrograma == "S"):
 
         while(comecarCompra == 1):
             print("Cardápio:")
-            print("100 - Cachorro Quente - R$ 3,50")
-            print("101 - Bauru simples   - R$ 3,80")
-            print("102 - Bauru c/ ovo    - R$ 4,50")
-            print("103 - Hamburguer      - R$ 4,70")
-            print("104 - Cheesburguer    - R$ 5,30")
-            print("105 - Refrigerante    - R$ 4,00")
+            # Gerando o cardápio dinamicamente
+            for i in range(len(codigos)):
+                print(f"{codigos[i]} - {esp[i]} - R$ {preco[i]:.2f}")
             
             cod = int(input("Digite o codigo desejado:\n"))
             
