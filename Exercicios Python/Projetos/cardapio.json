@@ -1,0 +1,47 @@
+[
+    {
+        "codigo": 100,
+        "nome": "Cachorro Quente",
+        "preco": 10
+    },
+    {
+        "codigo": 101,
+        "nome": "Bauru Simples",
+        "preco": 5
+    },
+    {
+        "codigo": 102,
+        "nome": "Bauru c/Ovo",
+        "preco": 6.5
+    },
+    {
+        "codigo": 103,
+        "nome": "Hamburguer",
+        "preco": 13.5
+    },
+    {
+        "codigo": 104,
+        "nome": "Cheesburguer",
+        "preco": 12
+    },
+    {
+        "codigo": 105,
+        "nome": "Refrigerante",
+        "preco": 5
+    },
+    {
+        "codigo": 106,
+        "nome": "Agua",
+        "preco": 3.0
+    },
+    {
+        "codigo": 107,
+        "nome": "A\u00e7ai",
+        "preco": 8.0
+    },
+    {
+        "codigo": 108,
+        "nome": "Pastel",
+        "preco": 8.0
+    }
+]
