@@ -5,7 +5,7 @@ listaPedidos = []
 #listas de setup
 codigos = [100,101,102,103,104,105]
 esp = ["Cachorro Quente","Bauru Simples","Bauru c/Ovo","Hamburguer","Cheesburguer","Refrigerante"]
-preco = [3.50,3.80,4.50,4.70,5.30,4]
+preco = [10,5,6.50,13.50,12,5]
 
 #lista para armazenar o valor
 listaPreco = []
@@ -18,65 +18,45 @@ def validar_nome(nome):
         return False
     return True
 
-#Inicio programa
-comecarPrograma = input("iniciar novo pedido? (S/N)\n")
+def adicionarItem():
+    especificacao = input("\nDigite o item que deseja adicionar ao cardápio:\n")
+    esp.append(especificacao)
+    valorProduto = float(input("\nDigite o valor do item:\n"))
+    preco.append(valorProduto)
+    novoCod = max(codigos) + 1
+    codigos.append(novoCod)
 
-if(comecarPrograma == "s" or comecarPrograma == "S"):
-    comecarPrograma = 1
+#Inicio programa
+comecarPrograma = int(input("iniciar novo pedido? - 0 | Configurações - 1 \n"))
+
+if(comecarPrograma == 0):
+    comecarPrograma = True
 
     #Inicio pedido
-    while(comecarPrograma == 1):
+    while(comecarPrograma == True):
         nome = input("Digite seu nome:\n")
         while not validar_nome(nome):
             print("Nome inválido. Digite novamente (não pode estar vazio ou conter números).")
             nome = input("Digite seu nome:\n")
 
         listaPedidos.append(nome)
-        comecarCompra = 1
+        comecarCompra = True
 
-        while(comecarCompra == 1):
-            print("Cardápio:")
-            # Gerando o cardápio dinamicamente
-            for i in range(len(codigos)):
-                print(f"{codigos[i]} - {esp[i]} - R$ {preco[i]:.2f}")
+        while(comecarCompra == True):
+            print("\nCardápio:")
             
-            cod = int(input("Digite o codigo desejado:\n"))
+            for n in range(len(codigos)):
+                print(f"{codigos[n]} - {esp[n]} - R$ {preco[n]:.2f}")
             
-            #Se o cod informado estiver na lista ele prosegue e atribui os valores especificados daquele cod
+            cod = int(input("\nDigite o codigo desejado:\n"))
+            
             if(cod in codigos):
-                continuaCompra = 1
+                posicao = codigos.index(cod)
 
-                while(continuaCompra == 1):
-                    if(cod == 100):
-                        pedido.append(cod)
-                        pedido.append(esp[0])
-                        pedido.append(preco[0])
-                        continuaCompra = 0
-                    elif(cod == 101):
-                        pedido.append(cod)
-                        pedido.append(esp[1])
-                        pedido.append(preco[1])
-                        continuaCompra = 0
-                    elif(cod == 102):
-                        pedido.append(cod)
-                        pedido.append(esp[2])
-                        pedido.append(preco[2])
-                        continuaCompra = 0
-                    elif(cod == 103):
-                        pedido.append(cod)
-                        pedido.append(esp[3])
-                        pedido.append(preco[3])
-                        continuaCompra = 0
-                    elif(cod == 104):
-                        pedido.append(cod)
-                        pedido.append(esp[4])
-                        pedido.append(preco[4])
-                        continuaCompra = 0
-                    else:
-                        pedido.append(cod)
-                        pedido.append(esp[5])
-                        pedido.append(preco[5])
-                        continuaCompra = 0
+                #Usa a posião do codigo para atribuir o resto das informações ao pedido
+                pedido.append(cod)
+                pedido.append(esp[posicao])
+                pedido.append(preco[posicao])
 
                 #Pergunta ao usuario a quantidade do item
                 quantidade = int(input("Digite a quantidade:\n"))
@@ -96,9 +76,8 @@ if(comecarPrograma == "s" or comecarPrograma == "S"):
                 confirma = input("Deseja finalizar o pedido? (S/N)\n")
 
                 if(confirma == "s" or confirma == "S"):
-                    comecarCompra = 0
-                    comecarPrograma = 0
-                    cod = 0
+                    comecarCompra = False
+                    comecarPrograma = False
 
                 else:
                     print("adicionar novo item:\n")
@@ -113,6 +92,25 @@ if(comecarPrograma == "s" or comecarPrograma == "S"):
         for item in listaPedidos[1:]:
             print(f"  - Código: {item[0]}, Produto: {item[1]}, Preço: R${item[2]}, Quantidade: {item[3]}, Subtotal: R${item[4]}")
         print(f"Total a pagar: R${total}")
+
+#Menu de Configurações
+elif(comecarPrograma == 1):
+    menuConfig = True
+
+    while(menuConfig == True):
+        usuario = input("\nDigite o usuario\n")
+        senha = input("\nDigite a senha:\n")
+
+        if(usuario == "gz" and senha == "123"):
+            adicionarItem()
+            sair = input("\nSair das configurações: (S/N)\n")
+            if(sair == "S" or sair == "s"):
+                menuConfig = False
+            else:
+                print("Adicionar novo item")
+                
+        else:
+            print("Usuario ou senha Incorretos")
 
 else: 
     print("Pedido encerrado")
