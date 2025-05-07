@@ -14,7 +14,7 @@ preco = []
 listaPreco = []
 
 # Função para carregar o cardápio do arquivo
-def carregar_cardapio():
+def carregarCardapio():
     caminho_cardapio = os.path.join(os.path.dirname(__file__), "cardapio.json")
     if os.path.exists(caminho_cardapio):
         with open(caminho_cardapio, "r") as f:
@@ -28,17 +28,17 @@ def carregar_cardapio():
                 preco.append(item["preco"])
 
 # Função para salvar o cardápio no arquivo
-def salvar_cardapio():
+def salvarCardapio():
     dados = [{"codigo": codigos[i], "nome": esp[i], "preco": preco[i]} for i in range(len(codigos))]
     caminho_cardapio = os.path.join(os.path.dirname(__file__), "cardapio.json")
     with open(caminho_cardapio, "w") as f:
         json.dump(dados, f, indent=4)
 
 # Carregar cardápio ao iniciar o programa
-carregar_cardapio()
+carregarCardapio()
 
 # Função para validar o nome do cliente
-def validar_nome(nome):
+def validarNome(nome):
     if not nome.strip():
         return False
     if any(char.isdigit() for char in nome):
@@ -53,7 +53,7 @@ def adicionarItem():
     codigos.append(novoCod)
     esp.append(especificacao)
     preco.append(valorProduto)
-    salvar_cardapio()
+    salvarCardapio()
 
 
 # Início do programa
@@ -64,7 +64,7 @@ if comecarPrograma == 0:
 
     while comecarPrograma:
         nome = input("Digite seu nome:\n")
-        while not validar_nome(nome):
+        while not validarNome(nome):
             print("Nome inválido. Digite novamente (não pode estar vazio ou conter números).")
             nome = input("Digite seu nome:\n")
 
