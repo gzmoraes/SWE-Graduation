@@ -31,17 +31,23 @@
     },
     {
         "codigo": 106,
-        "nome": "Agua",
-        "preco": 3.0
+        "nome": "Pastel",
+        "preco": 8.0
     },
     {
         "codigo": 107,
         "nome": "A\u00e7ai",
         "preco": 8.0
     },
+    
     {
         "codigo": 108,
-        "nome": "Pastel",
-        "preco": 8.0
+        "nome": "Agua",
+        "preco": 3.0
+    },
+    {
+        "codigo": 109,
+        "nome": "Suco",
+        "preco": 4.0
     }
 ]

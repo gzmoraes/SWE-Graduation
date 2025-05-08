@@ -13,7 +13,7 @@ preco = []
 # Lista para armazenar o valor total
 listaPreco = []
 
-# Função para carregar o cardápio do arquivo
+# Função para carregar o cardápio do arquivo .json
 def carregarCardapio():
     caminho_cardapio = os.path.join(os.path.dirname(__file__), "cardapio.json")
     if os.path.exists(caminho_cardapio):
@@ -27,7 +27,7 @@ def carregarCardapio():
                 esp.append(item["nome"])
                 preco.append(item["preco"])
 
-# Função para salvar o cardápio no arquivo
+# Função para salvar o cardápio no arquivo .json
 def salvarCardapio():
     dados = [{"codigo": codigos[i], "nome": esp[i], "preco": preco[i]} for i in range(len(codigos))]
     caminho_cardapio = os.path.join(os.path.dirname(__file__), "cardapio.json")
@@ -45,7 +45,7 @@ def validarNome(nome):
         return False
     return True
 
-# Função para adicionar novo item ao cardápio
+# Função para adicionar novo item ao cardápio 
 def adicionarItem():
     especificacao = input("\nDigite o item que deseja adicionar ao cardápio:\n")
     valorProduto = float(input("Digite o valor do item:\n"))
@@ -111,6 +111,15 @@ if comecarPrograma == 0:
         for item in listaPedidos[1:]:
             print(f"  - Código: {item[0]}, Produto: {item[1]}, Preço: R${item[2]}, Quantidade: {item[3]}, Subtotal: R${item[4]:.2f}")
         print(f"Total a pagar: R${total:.2f}")
+
+        # Cria um arquivo txt com o pedido
+        with open(os.path.join(os.path.dirname(__file__), "pedido.txt"), "w") as arquivo:
+            arquivo.write(f"Nome: {listaPedidos[0]}\n")
+            arquivo.write("Pedido:\n")
+            for item in listaPedidos[1:]:
+                pedidosFeitos = f"  - Codigo: {item[0]}, Produto: {item[1]}, Preço: R${item[2]}, Quantidade: {item[3]}, Subtotal: R${item[4]:.2f}\n"
+                arquivo.write(pedidosFeitos)
+            arquivo.write(f"Total a pagar: R${total:.2f}")
 
 # Menu de Configurações
 elif comecarPrograma == 1:
