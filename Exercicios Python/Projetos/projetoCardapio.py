@@ -18,25 +18,17 @@ def validar_nome(nome):
         return False
     return True
 
-def adicionarItem():
-    especificacao = input("\nDigite o item que deseja adicionar ao cardápio:\n")
-    esp.append(especificacao)
-    valorProduto = float(input("\nDigite o valor do item:\n"))
-    preco.append(valorProduto)
-    novoCod = max(codigos) + 1
-    codigos.append(novoCod)
-
 #Inicio programa
-comecarPrograma = int(input("iniciar novo pedido? - 0 | Configurações - 1 \n"))
+comecarPrograma = input("iniciar novo pedido? (S/N)\n")
 
-if(comecarPrograma == 0):
+if(comecarPrograma == "s" or comecarPrograma == "S"):
     comecarPrograma = True
 
     #Inicio pedido
     while(comecarPrograma == True):
         nome = input("Digite seu nome:\n")
         while not validar_nome(nome):
-            print("Nome inválido. Digite novamente (não pode estar vazio ou conter números).")
+            print("\nNome inválido.\nDigite novamente (não pode estar vazio ou conter números).\n")
             nome = input("Digite seu nome:\n")
 
         listaPedidos.append(nome)
@@ -87,30 +79,11 @@ if(comecarPrograma == 0):
             
 
         #Imprimir ao usuario seu pedido
-        print(f"Nome: {listaPedidos[0]}")
+        print(f"\nNome: {listaPedidos[0]}")
         print("pedido:")
         for item in listaPedidos[1:]:
             print(f"  - Código: {item[0]}, Produto: {item[1]}, Preço: R${item[2]}, Quantidade: {item[3]}, Subtotal: R${item[4]}")
         print(f"Total a pagar: R${total}")
-
-#Menu de Configurações
-elif(comecarPrograma == 1):
-    menuConfig = True
-
-    while(menuConfig == True):
-        usuario = input("\nDigite o usuario\n")
-        senha = input("\nDigite a senha:\n")
-
-        if(usuario == "gz" and senha == "123"):
-            adicionarItem()
-            sair = input("\nSair das configurações: (S/N)\n")
-            if(sair == "S" or sair == "s"):
-                menuConfig = False
-            else:
-                print("Adicionar novo item")
-                
-        else:
-            print("Usuario ou senha Incorretos")
 
 else: 
     print("Pedido encerrado")
