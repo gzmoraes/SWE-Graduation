@@ -1,6 +1,7 @@
+#Função para cadastrar um novo produto.
 def cadastro(): 
     cardapio = open("cardapio.txt", "a+")
-    item = input("Digite o Nome do Item:\n")
+    item = input("\nDigite o Nome do Item:\n")
     valor = float(input("Digite o Valor do item:\n"))
     cod = int(input("Digite o código do item:\n"))
 
@@ -9,8 +10,9 @@ def cadastro():
     cardapio.write(F"R${valor}")
     cardapio.close()
 
+#Fução para alterar um produto
 def alterarProduto():
-    codigo = input("Digite o código do item que deseja alterar:\n")
+    codigo = input("\nDigite o código do item que deseja alterar:\n")
     novoItem = input("Digite o novo nome do item:\n")
     novoValor = input("Digite o novo valor do item:\n")
 
@@ -25,10 +27,11 @@ def alterarProduto():
         else:
             cardapio.write(linha)
     cardapio.close()
-    print("Produto alterado com sucesso.")
+    print("\nProduto alterado com sucesso.")
 
+#Função para apagar produto especifico com base no cod dele.
 def apagarProduto():
-    codigo = input("Digite o código do item que deseja apagar:\n")
+    codigo = input("\nDigite o código do item que deseja apagar:\n")
 
     cardapio = open("cardapio.txt", "r")
     linhas = cardapio.readlines()
@@ -39,25 +42,15 @@ def apagarProduto():
         if str(codigo) not in linha:
             cardapio.write(linha)
     cardapio.close()
-    print("Produto apagado com sucesso.")
+    print("\nProduto apagado com sucesso.")
 
-def listarProdutos():
-    cardapio = open("cardapio.txt", "r")
-    linhas = cardapio.readlines()
-    cardapio.close()
-
-    print("\n--- LISTA DE PRODUTOS ---\n")
-    if len(linhas) == 0:
-        print("Nenhum produto cadastrado.")
-    else:
-        for linha in linhas:
-            print(linha.strip())
-
+#Exibe o Cardapio
 def chamarCardapio():
     cardapio = open("cardapio.txt", "r")
     print(cardapio.read())
     cardapio.close()
 
+#Cria o pedido e armazena os itens selecionados
 def procurarItem(codProcurado):
     encontrado = False
     procurar = open("cardapio.txt", "r")
@@ -81,6 +74,7 @@ def procurarItem(codProcurado):
     if not encontrado:
         print("Código não encontrado.")
 
+#Fializa o pedido e mostra a soma total
 def finalizarPedido():
     pedidotxt = open("Pedido.txt", "r")
     linhas = pedidotxt.readlines()
@@ -102,12 +96,14 @@ def finalizarPedido():
 
     print(f"\nTotal do pedido: R$ {total:.2f}")
 
+    #Pergunta se quer finalizar o pedido
     confirmar = input("\nDeseja confirmar o pedido? (s/n):\n").lower()
 
     if confirmar == "s":
         nome_cliente = input("Digite o nome do cliente:\n")
-        historico = open("Historico.txt", "a+")
 
+        #Adiciona o pedido em um txt de historico
+        historico = open("Historico.txt", "a+")
         historico.write(f"\nCliente: {nome_cliente}\n")
         for linha in linhas:
             historico.write(linha)
@@ -121,11 +117,13 @@ def finalizarPedido():
         print("Pedido cancelado.")
         open("Pedido.txt", "w").close()
 
+#Função para chamar o menu inicial
 def menu():
     print("1 - Administrador\n" \
     "2 - Operador\n" \
     "0 - Sair\n")
 
+#Função para chamar o menu de administrador 
 def menuAdm():
     print("\n1 - Cadastrar Produto\n" \
         "2 - Listar Protudos\n" \
@@ -133,6 +131,7 @@ def menuAdm():
         "4 - Apagar Produto\n" \
         "0 - Voltar\n")
 
+#Começa o programa
 start = True
 while (start == True):
     menu()
@@ -150,22 +149,27 @@ while (start == True):
     else:
         start = False
     
+    # aba de administrador 
     while(adm == True):
         menuAdm()
 
         opcoesAdm = int(input("Escolha uma opção:\n"))
 
         if(opcoesAdm == 1):
+            chamarCardapio()
             cadastro()
         elif(opcoesAdm == 2):
-            listarProdutos()
+            chamarCardapio()
         elif(opcoesAdm == 3):
+            chamarCardapio()
             alterarProduto()
         elif(opcoesAdm == 4):
+            chamarCardapio()
             apagarProduto()
         else:
             adm = False
 
+    # aba de operação
     while(operador == True):
         print("\nCardapio:")
         chamarCardapio()
