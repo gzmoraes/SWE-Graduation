@@ -1,0 +1,5 @@
+Cliente: Gustavo
+Pedido: Hamburguer - Quantidade: 2 - Valor Unit�rio: R$24.00 - Total: R$48.00
+Pedido: Coca - Quantidade: 2 - Valor Unit�rio: R$6.00 - Total: R$12.00
+Valor Total do Pedido: R$60.00
+----------------------------------------
