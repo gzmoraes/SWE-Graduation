@@ -1,0 +1,5 @@
+
+Cliente: Gustavo
+Pedido: X-Portuguesa - Quantidade: 2 - Valor Unitário: R$27.00 - Total: R$54.00
+Valor Total do Pedido: R$54.00
+----------------------------------------
