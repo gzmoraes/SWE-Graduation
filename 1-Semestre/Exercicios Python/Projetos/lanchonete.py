@@ -21,9 +21,14 @@ def cadastro():
     listaGeral = []
     listaId = []
 
-    
+
     desc = input('Insira o Nome do Item:\n')
-    valor = float(input('Insira o valor do Produto:\n'))
+    while desc == "":
+        desc = input('Nome invalido! Insira o Nome do Item:\n')
+    valor = input('Insira o valor do Produto:\n')
+    while valor == "" or not valor.isdigit():
+        valor = input('Valor Invalido! Insira o valor do Produto:\n')
+
 
     for i in linhas:
         colunas = i.strip().split(';') 
@@ -80,7 +85,12 @@ def editar():
 
         if id == idCol:
             novoNome = input('Digite o Novo Nome:\n')
-            novoValor = float(input('Digite o novo valor:\n'))
+            while novoNome == "":
+                novoNome = input('Nome invalido! Insira o Nome do Item:\n')
+
+            novoValor = input('Insira o valor do Produto:\n')
+            while novoValor == "" or not novoValor.isdigit():
+                novoValor = input('Valor Invalido! Insira o valor do Produto:\n')
 
             novaLinha = f'{id};{novoNome};{novoValor}\n'
             listaGeral.append(novaLinha)
@@ -100,9 +110,23 @@ def excluir():
     linhas = arquivo.readlines()
     arquivo.close()
 
-    listaGeral = []
+    ids = []
+
+    for i in linhas:
+        colunas = i.strip().split(';')
+        idExistentes = int(colunas[0])
+        ids.append(idExistentes)
 
     id = int(input('Digite o ID do Produto que deseja excluir:\n'))
+    validar = True
+    while validar == True:
+        
+        if id in ids:
+            validar = False
+        else:
+            id = int(input('ID invalido! Digite o ID do Produto que deseja excluir:\n'))
+    
+    listaGeral = []
 
     for i in linhas:
         colunas = i.strip().split(';')
@@ -133,7 +157,7 @@ def pedido():
 
     for linha in linhas:
         coluna = linha.strip().split(";")
-        cod = int(coluna[0])
+        cod = coluna[0]
         item = coluna[1]
         valor = float(coluna[2])
 
@@ -142,34 +166,39 @@ def pedido():
         listaValor.append(valor)
 
     nome = input("\nDigite seu nome:\n")
+    while nome == "":
+        print('Nome Invalido! Digite o nome:\n')
+        nome = input("\nDigite seu nome:\n")
 
     listaPedido = []
     totalGeral = 0
 
+    codigo = input("Digite o código do pedido desejado:\n")
+    while codigo not in listaCod:
+        codigo = input("Codigo Invalido! Digite o código do pedido desejado:\n")
+
     comecarP = True
-
     while comecarP == True:
-        codigo = int(input("Digite o código do pedido desejado:\n"))
+        posicao = listaCod.index(codigo)
 
-        if codigo in listaCod:
-            posicao = listaCod.index(codigo)
+        qnt = int(input("Informe a quantidade:\n"))
 
-            qnt = int(input("Informe a quantidade:\n"))
+        desc = listaItem[posicao]
+        valorU = listaValor[posicao]
+        valorF = qnt * valorU
+        totalGeral += valorF
 
-            desc = listaItem[posicao]
-            valorU = listaValor[posicao]
-            valorF = qnt * valorU
-            totalGeral += valorF
+        listaPedido.append((desc, qnt, valorU, valorF))
 
-            listaPedido.append((desc, qnt, valorU, valorF))
-
-            print(f"Adicionado: {desc} x{qnt} - Total: R${valorF:.2f}")
-        else:
-            print("Código não encontrado!")
+        print(f"Adicionado: {desc} x{qnt} - Total: R${valorF:.2f}")
 
         sair = input("\nDeseja adicionar outro item? (s/n): ")
         if sair != "s":
             comecarP = False
+        else:
+            codigo = input("Digite o código do pedido desejado:\n")
+            while codigo not in listaCod:
+                codigo = input("Codigo Invalido! Digite o código do pedido desejado:\n")
 
     # Exibe o resumo final do pedido
     print("\n--- Pedido Final ---")
@@ -196,8 +225,8 @@ while start:
     operador = False
 
     if opcoes == 1:
-        user = input("Digite o usuario:")
-        senha = input("Digite a senha:")
+        user = input("Digite o usuario:\n")
+        senha = input("Digite a senha:\n")
         autenticacao = 1
         while autenticacao == 1:
             if user == "adm" and senha =="123":
