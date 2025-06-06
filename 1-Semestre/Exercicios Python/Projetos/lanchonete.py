@@ -73,9 +73,23 @@ def editar():
     linhas = arquivo.readlines()
     arquivo.close()
 
-    listaGeral = []
+    ids = []
 
-    id = int(input('Digite o Id do código item que deseja editar:\n'))
+    for i in linhas:
+        colunas = i.strip().split(';')
+        idExistentes = int(colunas[0])
+        ids.append(idExistentes)
+
+    id = int(input('Digite o ID do Produto que deseja excluir:\n'))
+    validar = True
+    while validar == True:
+        
+        if id in ids:
+            validar = False
+        else:
+            id = int(input('ID invalido! Digite o ID do Produto que deseja excluir:\n'))
+
+    listaGeral = []
 
     for i in linhas:
         colunas = i.strip().split(';')
